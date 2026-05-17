@@ -1,0 +1,31 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.rsuser
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Logs
+*.log
+
+# Local settings / secrets
+appsettings.Development.json
+.env
+
+# Database files
+*.mdf
+*.ldf
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Payment Success";
+}
+
+<div class="container mt-5">
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div class="alert alert-success">
+            <h4>Payment Successful</h4>
+            <p>@ViewBag.Message</p>
+            <p>Transaction ID: @ViewBag.TranId</p>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <h4>Payment Validation Failed</h4>
+            <p>@ViewBag.Message</p>
+            <p>Transaction ID: @ViewBag.TranId</p>
+        </div>
+    }
+
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+        Back to Home
+    </a>
+</div>

@@ -1,0 +1,70 @@
+﻿@model BLL.DTOs.BookDto
+
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+<div class="container mt-4">
+    <h2>Add New Book</h2>
+
+    <form asp-controller="AdminBook" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select asp-for="CategoryId" class="form-control">
+                <option value="">-- Select Category --</option>
+                @foreach (var c in ViewBag.Categories)
+                {
+                    <option value="@c.CategoryId">@c.CategoryName</option>
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="AuthorName" class="form-label"></label>
+            <input asp-for="AuthorName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Quantity" class="form-label"></label>
+            <input asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImagePath" class="form-label">Image URL / Path</label>
+            <input asp-for="ImagePath" class="form-control" placeholder="/images/books/book1.jpg" />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Save Book
+        </button>
+
+        <a asp-controller="AdminBook" asp-action="Index" class="btn btn-secondary">
+            Back
+        </a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

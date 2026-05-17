@@ -1,0 +1,174 @@
+﻿@model BLL.DTOs.SalesSummaryDto
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2>Admin Dashboard</h2>
+            <p>Welcome, @ViewBag.FullName</p>
+        </div>
+
+        <div>
+            <a asp-controller="AdminBook" asp-action="Index" class="btn btn-primary me-2">
+                Manage Books
+            </a>
+
+            <a asp-controller="Auth" asp-action="Logout" class="btn btn-danger">
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <hr />
+
+    <h4 class="mb-3">Sales Statistics</h4>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card text-bg-primary mb-3">
+                <div class="card-body">
+                    <h6>Total Sales</h6>
+                    <h3>@Model.TotalSales BDT</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-bg-success mb-3">
+                <div class="card-body">
+                    <h6>Today's Sales</h6>
+                    <h3>@Model.TodaysSales BDT</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-bg-info mb-3">
+                <div class="card-body">
+                    <h6>Monthly Sales</h6>
+                    <h3>@Model.MonthlySales BDT</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-bg-dark mb-3">
+                <div class="card-body">
+                    <h6>Paid Orders</h6>
+                    <h3>@Model.TotalPaidOrders</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-warning mb-3">
+                <div class="card-body">
+                    <h6>Pending Orders</h6>
+                    <h3>@Model.PendingOrders</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-danger mb-3">
+                <div class="card-body">
+                    <h6>Failed Orders</h6>
+                    <h3>@Model.FailedOrders</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-secondary mb-3">
+                <div class="card-body">
+                    <h6>Cancelled Orders</h6>
+                    <h3>@Model.CancelledOrders</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-primary mb-3">
+                <div class="card-body">
+                    <h6>Total Books Sold</h6>
+                    <h3>@Model.TotalBooksSold</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4>Most Sold Books</h4>
+
+    @if (Model.MostSoldBooks.Count == 0)
+    {
+        <div class="alert alert-info">
+            No paid sales data found yet.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Total Quantity Sold</th>
+                    <th>Total Amount</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var book in Model.MostSoldBooks)
+                {
+                    <tr>
+                        <td>@book.BookTitle</td>
+                        <td>@book.TotalQuantity</td>
+                        <td>@book.TotalAmount BDT</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <h4 class="mt-4">Recent Orders</h4>
+
+    @if (Model.RecentOrders.Count == 0)
+    {
+        <div class="alert alert-info">
+            No orders found yet.
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Paid At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var order in Model.RecentOrders)
+                {
+                    <tr>
+                        <td>@order.TranId</td>
+                        <td>@order.TotalAmount BDT</td>
+                        <td>@order.OrderStatus</td>
+                        <td>@order.CreatedAt</td>
+                        <td>@order.PaidAt</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>

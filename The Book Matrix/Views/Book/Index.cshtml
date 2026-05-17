@@ -1,0 +1,80 @@
+﻿@model List<BLL.DTOs.BookDto>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<div class="container mt-4">
+    <h2>Available Books</h2>
+
+    <a asp-controller="Cart" asp-action="Index" class="btn btn-info mb-3">
+        View Cart
+    </a>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="row">
+        @foreach (var book in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 shadow">
+
+                    @if (!string.IsNullOrEmpty(book.ImagePath))
+                    {
+                        <img src="@book.ImagePath" class="card-img-top" style="height:220px; object-fit:cover;" />
+                    }
+                    else
+                    {
+                        <div class="text-center p-5 bg-light">
+                            No Image
+                        </div>
+                    }
+
+                    <div class="card-body">
+                        <h5 class="card-title">@book.Title</h5>
+
+                        <p class="card-text">
+                            <strong>Category:</strong> @book.CategoryName <br />
+                            <strong>Author:</strong> @book.AuthorName <br />
+                            <strong>Price:</strong> @book.Price <br />
+                            <strong>Stock:</strong> @book.Quantity
+                        </p>
+
+                        <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" name="bookId" value="@book.BookId" />
+
+                            <div class="mb-2">
+                                <label class="form-label">Quantity</label>
+                                <input type="number"
+                                       name="quantity"
+                                       value="1"
+                                       min="1"
+                                       max="@book.Quantity"
+                                       class="form-control" />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                Add to Cart
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>

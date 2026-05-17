@@ -1,0 +1,86 @@
+﻿@model BLL.DTOs.BookDto
+
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<div class="container mt-4">
+    <h2>Edit Book</h2>
+
+    <form asp-controller="AdminBook" asp-action="Edit" method="post">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="BookId" />
+
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select asp-for="CategoryId" class="form-control">
+                @foreach (var c in ViewBag.Categories)
+                {
+                    if (c.CategoryId == Model.CategoryId)
+                    {
+                        <option value="@c.CategoryId" selected>@c.CategoryName</option>
+                    }
+                    else
+                    {
+                        <option value="@c.CategoryId">@c.CategoryName</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="AuthorName" class="form-label"></label>
+            <input asp-for="AuthorName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Quantity" class="form-label"></label>
+            <input asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImagePath" class="form-label">Image URL / Path</label>
+            <input asp-for="ImagePath" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IsActive" class="form-label"></label>
+            <select asp-for="IsActive" class="form-control">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Update Book
+        </button>
+
+        <a asp-controller="AdminBook" asp-action="Index" class="btn btn-secondary">
+            Back
+        </a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

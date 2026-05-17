@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Payment Cancelled";
+}
+
+<div class="container mt-5">
+    <div class="alert alert-warning">
+        <h4>Payment Cancelled</h4>
+        <p>@ViewBag.Message</p>
+        <p>Transaction ID: @ViewBag.TranId</p>
+    </div>
+
+    <a asp-controller="Cart" asp-action="Index" class="btn btn-primary">
+        Back to Cart
+    </a>
+</div>

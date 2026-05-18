@@ -1,4 +1,5 @@
-﻿# The Book Matrix
+# The Book Matrix
+http://thebookmatrix.tryasp.net/ 
 
 A professional ASP.NET Core MVC book shop management system built with a layered architecture, SQL Server Database First approach, session-based authentication, email verification, admin book management, shopping cart, SSLCommerz sandbox payment, and sales analytics dashboard.
 
